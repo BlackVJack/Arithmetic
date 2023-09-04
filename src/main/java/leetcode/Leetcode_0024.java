@@ -23,15 +23,15 @@ public class Leetcode_0024 {
         p3 = p3.next;
         p4 = p3.next;
         while (true) {
-            p3.next = p2;
-            p2.next = p4;
             p1.next = p3;
+            p2.next = p4;
+            p3.next = p2;
 
             if (p4 == null || p4.next == null) break;
             p1 = p2;
             p2 = p4;
-            p3 = p2.next;
-            p4 = p3.next;
+            p3 = p4.next;
+            p4 = p4.next.next;
         }
         return result;
     }
