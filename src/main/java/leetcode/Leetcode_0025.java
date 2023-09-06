@@ -3,6 +3,8 @@ package leetcode;
 /**
  * author: BlackVJack/Justice
  * time:2023/7/26 22:44
+ *
+ * 力扣题库第0025题
  */
 public class Leetcode_0025 {
     static class ListNode {

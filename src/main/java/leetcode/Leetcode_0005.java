@@ -4,7 +4,7 @@ package leetcode;
  * @author BlackVJack/Justice
  * @time 2023/9/2 11:11
  *
- *   最长回文字串
+ * 力扣题库第0005题 最长回文字串
  */
 public class Leetcode_0005 {
 

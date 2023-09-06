@@ -9,7 +9,7 @@ import java.util.List;
  * @author BlackVJack/Justice
  * @time 2023/9/2 12:39
  *
- * 力扣题库第47题: 全排列(2)
+ * 力扣题库第0047题: 全排列(2)
  * 给定一个可包含重复数字的序列 nums, 按任意顺序 返回所有不重复的全排列。
  *
  * 示例1:
