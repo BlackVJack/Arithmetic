@@ -25,13 +25,12 @@ public class Leetcode_2594 {
             }
             if (sum >= cars) {
                 if (baseTime < min) min = baseTime;
-                r = x - 1;
+                r = x;
             }
             else {
                 l = x + 1;
             }
         }
-
         return min;
     }
 
