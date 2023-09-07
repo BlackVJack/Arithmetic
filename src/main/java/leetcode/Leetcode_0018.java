@@ -40,7 +40,7 @@ public class Leetcode_0018 {
     public List<List<Integer>> fourSum(int[] nums, int target) {
 
         int length = nums.length;
-        quickSort(nums, 0, length - 1);
+        tools.Sort.quickSort(nums, 0, length - 1);
         Set<List<Integer>> set = new HashSet<>();
 
         for (int i = 0; i < length - 3; i++) {
@@ -76,41 +76,6 @@ public class Leetcode_0018 {
             }
         }
         return new ArrayList<>(set);
-    }
-
-    // TODO 快排 - 核心(规划)代码
-    public void quickSort(int[] array, int left, int right) {
-        if (left < right) {
-            int mid = getMid(array, left, right);
-            quickSort(array, left, mid - 1);
-            quickSort(array, mid + 1, right);
-        }
-    }
-
-    // TODO 快排 - 局部排序
-    public int getMid(int[] array, int left, int right) {
-        int key = array[left];
-        while (left < right) {
-
-            while (left < right) {
-                if (array[right] < key) {
-                    array[left] = array[right];
-                    break;
-                }
-                right--;
-            }
-
-            while (left < right) {
-                if (array[left] > key) {
-                    array[right] = array[left];
-                    break;
-                }
-                left++;
-            }
-        }
-
-        array[left] = key;
-        return left;
     }
 
     // TODO 归并
@@ -158,7 +123,6 @@ public class Leetcode_0018 {
                 result.add(array_2[k++]);
             }
         }
-
         return result;
     }
 
