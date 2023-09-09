@@ -31,8 +31,8 @@ public class Leetcode_0018 {
      *      输出：[[2,2,2,2]]
      */
     public static void main(String[] args) {
-
-
+        System.out.println("apple".charAt(0));
+        System.out.println("apple".substring(1, "apple".length()));
 
     }
 
