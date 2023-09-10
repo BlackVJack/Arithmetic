@@ -36,40 +36,40 @@ public class Leetcode_0207 {
             preRequire[edge[0]].add(edge[1]);
         }
 
-        boolean[] learned = new boolean[numCourses];
+        // TODO 0代表未访问 1代表已经访问 2代表已学
+        int[] visitOrLearn = new int[numCourses];
         for (int i = 0; i < numCourses; i++) {
-            boolean[] visited = new boolean[numCourses];
-            if (learned[i]) continue;
-            learned[i] = check(learned, preRequire, i, visited);
-            if (!learned[i]) return false;
+            if (visitOrLearn[i] == 2) continue;
+            visitOrLearn[i] = check(visitOrLearn, preRequire, i);
+            if (visitOrLearn[i] == 1) return false;
         }
         return true;
     }
 
-    public boolean check(boolean[] learned, ArrayList<Integer>[] preRequire, int course, boolean[] visited) {
+    public int check(int[] visitOrLearn, ArrayList<Integer>[] preRequire, int course) {
         // TODO 如果已经学过, 说明可达不需要重复遍历, 提前剪枝并防止误判环路
-        if (learned[course]) return true;
+        if (visitOrLearn[course] == 2) return 2;
 
         // TODO 如果已经走过, 说明形成环路
-        if (visited[course]) return false;
+        if (visitOrLearn[course] == 1) return 1;
 
         // TODO 标记走过
-        visited[course] = true;
+        visitOrLearn[course] = 1;
 
         // TODO 获取该课程的前置课程
         List<Integer> preCourses = preRequire[course];
 
         // TODO 如果前置课程为空, 代表可直接学, 可达
         if (preCourses.size() == 0) {
-            return (learned[course] = true);
+            return (visitOrLearn[course] = 2);
         }
 
         // TODO 遍历前置课程, 深度优先搜索, 查看是否可达, 不可达则直接return false, 剪枝, 减少遍历
         for (int preCourse : preCourses) {
-            learned[preCourse] = check(learned, preRequire, preCourse, visited);
-            if (!learned[preCourse]) return false;
+            visitOrLearn[preCourse] = check(visitOrLearn, preRequire, preCourse);
+            if (visitOrLearn[preCourse] == 1) return 1;
         }
-        return true;
+        return 2;
     }
 
 
