@@ -43,7 +43,6 @@ public class Leetcode_0027 {
         for (int i = 0, j = length - 1; i < j; i++) {
             if (nums[i] == -1) {
                 while (nums[j] == -1 && i < j) j--;
-
                 nums[i] = nums[j];
                 nums[j--] = -1;
             }
