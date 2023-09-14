@@ -17,19 +17,22 @@ public class Leetcode_0055 {
 
         boolean[] flag = new boolean[length];
         flag[0] = true;
-        int i = 0;
-        while (i < length - 1) {
+
+        int farthest = 0;
+        for (int i = 0; i < length - 1; i++) {
             if (!flag[i]) return false;
-            if (i + nums[i] >= length - 1) return true;
+            int reach = i + nums[i];
+            if (reach <= farthest) continue;
+            farthest = reach;
+            if (farthest >= length) return true;
             for (int j = 1; j <= nums[i]; j++) {
                 flag[i + j] = true;
             }
-            i++;
         }
         return flag[length - 1];
     }
 
-    
+
     public static void main(String[] args) {
 
     }
