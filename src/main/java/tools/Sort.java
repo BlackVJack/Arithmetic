@@ -1,6 +1,7 @@
 package tools;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -13,8 +14,9 @@ import java.util.Random;
 
 public class Sort {
 
+
     /**
-     * 快速排序
+     * 快速排序核心
       * @param nums 数组
      * @param left 左边坐标
      * @param right 右边坐标
@@ -27,27 +29,37 @@ public class Sort {
         }
     }
 
+
+
+    /**
+     * 快排的分治函数
+     * @param nums 数组
+     * @param left 左指针
+     * @param right 右指针
+     * @return "中间"位置
+     */
     public static int findMid(int[] nums, int left, int right) {
         int key = nums[left];
+        int start = left;
         while (left < right) {
-            while (left < right) {
-                if (nums[right] < key) {
-                    nums[left] = nums[right];
-                    break;
-                }
+            while (left < right && nums[right] > key) {
                 right--;
             }
-            while (left < right) {
-                if (nums[left] > key) {
-                    nums[right] = nums[left];
-                    break;
-                }
+
+            while (left < right && nums[left] <= key) {
                 left++;
             }
+            if (left < right) {
+                int tmp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = tmp;
+            }
         }
-        nums[left] = key;
-        return left;
+        nums[start] = nums[right];
+        nums[right] = key;
+        return right;
     }
+
 
 
     /**
@@ -78,29 +90,37 @@ public class Sort {
     }
 
 
-    public static void compareQuickSortAndSelectSort() {
+    public static void compareQuickSortAndSelectSortAndSystemSort() {
         Random random = new Random();
 
-        int[] arrayQuick = new int[2000000];
-        int[] arraySelect = new int[2000000];
+        int length = 100000000;
 
-        for (int i = 0; i < 2000000; i++) {
+        int[] arrayQuick = new int[length];
+        int[] arraySelect = new int[length];
+        int[] arraySystem = new int[length];
+
+        for (int i = 0; i < length; i++) {
             int temp = random.nextInt();
             arrayQuick[i] = temp;
             arraySelect[i] = temp;
+            arraySystem[i] = temp;
         }
 
         long quickStart = System.currentTimeMillis();
-        quickSort(arrayQuick, 0, 1999999);
+        quickSort(arrayQuick, 0, length - 1);
         long quickEnd = System.currentTimeMillis();
 
-        long selectStart = System.currentTimeMillis();
-        selectSort(arraySelect);
-        long selectEnd = System.currentTimeMillis();
+//        long selectStart = System.currentTimeMillis();
+//        selectSort(arraySelect);
+//        long selectEnd = System.currentTimeMillis();
 
+        long systemStart = System.currentTimeMillis();
+        Arrays.sort(arraySystem);
+        long systemEnd = System.currentTimeMillis();
 
         long timeQuick = quickEnd - quickStart;
-        long timeSelect = selectEnd - selectStart;
+//        long timeSelect = selectEnd - selectStart;
+        long timeSystem = systemEnd - systemStart;
 
         System.out.println("快速排序耗时");
         System.out.println(timeQuick);
@@ -108,14 +128,27 @@ public class Sort {
                 timeQuick / (1000 * 60 * 60) % 60/* 时 */,
                 timeQuick / (1000 * 60)% 60/* 分 */,
                 timeQuick / 1000 % 60/* 秒 */);// 格式化字符串输出
+        System.out.println();
 
-        System.out.println("选择排序耗时: ");
-        System.out.println(timeSelect);
+        System.out.println("系统排序排序耗时: ");
+        System.out.println(timeSystem);
         System.out.format("%02d : %02d : %02d\n",
-                timeSelect / (1000 * 60 * 60) % 60/* 时 */,
-                timeSelect / (1000 * 60)% 60/* 分 */,
-                timeSelect / 1000 % 60/* 秒 */);// 格式化字符串输出
+                timeSystem / (1000 * 60 * 60) % 60/* 时 */,
+                timeSystem / (1000 * 60)% 60/* 分 */,
+                timeSystem / 1000 % 60/* 秒 */);// 格式化字符串输出
+        System.out.println();
+
+//        System.out.println("选择排序耗时: ");
+//        System.out.println(timeSelect);
+//        System.out.format("%02d : %02d : %02d\n",
+//                timeSelect / (1000 * 60 * 60) % 60/* 时 */,
+//                timeSelect / (1000 * 60)% 60/* 分 */,
+//                timeSelect / 1000 % 60/* 秒 */);// 格式化字符串输出
 
 
+    }
+
+    public static void main(String[] args) {
+        compareQuickSortAndSelectSortAndSystemSort();
     }
 }

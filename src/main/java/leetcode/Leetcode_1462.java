@@ -21,16 +21,12 @@ public class Leetcode_1462 {
             preRequire[course[1]][course[0]] = 1;
         }
 
-
         // TODO 递归查询
         int[] visit = new int[numCourses];
         for (int course = 0; course < numCourses; course++) {
             search(preRequire, visit, course, numCourses);
         }
 
-        for (int i = 0; i < numCourses; i++) {
-            System.out.println(Arrays.toString(preRequire[i]));
-        }
         // TODO 查询
         List<Boolean> res = new ArrayList<>();
         for (int[] query : queries) {

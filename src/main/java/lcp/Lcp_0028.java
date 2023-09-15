@@ -6,7 +6,7 @@ import java.util.Arrays;
  * @author BlackVJack/Justice
  * @time 2023/9/8 0:04
  *
- * 力扣题库LCP.28 采购方案
+ * 力扣题库LCP.0028 采购方案
  */
 public class Lcp_0028 {
 
